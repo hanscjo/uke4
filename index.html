@@ -26,10 +26,12 @@
             document.getElementById("app").innerHTML = `
             <h1>Velkommen!</h1>
             <h3>${resultMessage}Hvem er størst?</h3>
-            <p><span class="bigFont">${num1}</span> eller <span class="bigFont">${num2}</span></p>
-            <br>
+            <div class="bigFont">${num1}
             <input id="operatorInput" value="">
+            ${num2}</div>
             <button onclick=submit()>Svar!</button>
+            <br>
+            <br>
             <br>
             <button onclick=reset()>Nullstill!</button>
             <p class="bigFont">Poeng: ${points}</p>
