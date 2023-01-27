@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tittel</title>
+    <title>Krokodillespillet!</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,23 +13,63 @@
     
     <script>
         //model
-        var counter = 0;
+        let num1 = Math.floor(Math.random()*10) + 1;
+        let num2 = Math.floor(Math.random()*10) + 1;
+        let points = 0;
+        let errorMessage = '';
+        let resultMessage = '';
+        let acceptedOperators = ['=', '<', '>'];
         
         //view
         view();
         function view() { /*HTML*/ //<-- dersom du vil få innerhtml stringen til å se ut som HTML
             document.getElementById("app").innerHTML = `
             <h1>Velkommen!</h1>
-            <p>Tallet er ${counter}</p>
+            <h3>${resultMessage}Hvem er størst?</h3>
+            <p><span class="bigFont">${num1}</span> eller <span class="bigFont">${num2}</span></p>
             <br>
-            <button onclick=increment()>Inkrementer!</button>
+            <input id="operatorInput" value="">
+            <button onclick=submit()>Svar!</button>
+            <br>
+            <button onclick=reset()>Nullstill!</button>
+            <p class="bigFont">Poeng: ${points}</p>
+            <p id="errorMessage">${errorMessage}</p>
             `;
         }
 
         //controller
-        function increment() {
-            counter++;
+        function submit() {
+            let operator = getElement('operatorInput').value;
+            if (!acceptedOperators.includes(operator)) {
+                errorMessage = 'Du må velge enten "<", ">" eller "=" tegnene.';
+                view();
+            }
+            else {
+                if (operator == '=') {
+                    operator = '=='; //Se neste kommentar
+                }
+                if (eval(num1+operator+num2)) { //Innebygd javascript-funksjon som leser matematiske utrykk utifra strings. Feiler med enkelt likhetstegn.
+                    points++;
+                    resultMessage = 'Riktig! ';      
+                }
+                else {
+                    points--;
+                    resultMessage = 'Feil! ';
+                }
+                reset();
+            }   
+        }
+
+        function reset() {
+            num1 = Math.floor(Math.random()*10) + 1;
+            num2 = Math.floor(Math.random()*10) + 1;
+            getElement('operatorInput').value = '';
+            errorMessage = '';
             view();
+        }
+
+        function getElement(id) {
+            return document.getElementById(id);
         }
 
     </script>
