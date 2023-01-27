@@ -6,3 +6,8 @@
     font-size: 100px;
     color: red;
 }
+
+button {
+    margin-left: 80px;
+    padding: 25px;
+}
