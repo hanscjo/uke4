@@ -40,7 +40,7 @@
         //controller
         function submit() {
             let operator = getElement('operatorInput').value;
-            if (!acceptedOperators.includes(operator)) {
+            if (!acceptedOperators.includes(operator)) { //Ser i arrayet etter operatoren. Dette er et alternativ til å skrive if-statement til hver eneste operator.
                 errorMessage = 'Du må velge enten "<", ">" eller "=" tegnene.';
                 view();
             }
