@@ -43,8 +43,7 @@
         function submit() {
             let operator = getElement('operatorInput').value;
             if (!acceptedOperators.includes(operator)) { //Ser i arrayet etter operatoren. Dette er et alternativ til å skrive if-statement til hver eneste operator.
-                errorMessage = 'Du må velge enten "<", ">" eller "=" tegnene.';
-                view();
+                sendError();
             }
             else {
                 if (operator == '=') {
@@ -65,8 +64,13 @@
         function reset() {
             num1 = Math.floor(Math.random()*10) + 1;
             num2 = Math.floor(Math.random()*10) + 1;
-            getElement('operatorInput').value = '';
             errorMessage = '';
+            view();
+        }
+
+        function sendError() {
+            errorMessage = 'Du må velge enten "<", ">" eller "=" tegnene.';
+            resultMessage = 'Ukjent tegn! ';
             view();
         }
 
